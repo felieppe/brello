@@ -1,0 +1,55 @@
+.board__header {
+    padding: 20px 0;
+    background-color: #00917b;
+}
+.board__header h1 {
+    color: white;
+    font-size: 1.2rem;
+    padding: 0 30px;
+    font-weight: bold;
+}
+
+.board__content {
+    display: flex;
+    background-color: #00d1b2;
+    width: 100%;
+    padding: 20px 30px;
+    grid-column: 1;
+    grid-gap: 20px;
+}
+
+.board__content__column {
+    width: 280px;
+    border-radius: 10px;
+    background-color: #f1f2f4;
+    overflow-y: auto;
+    padding-bottom: 15px;
+}
+
+.column__header {
+    color: black;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.task {
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgb(188, 188, 188);
+    color: black;
+}
+
+.column__add {
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.column__add svg {
+    margin-right: 10px;
+}
