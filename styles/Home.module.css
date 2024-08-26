@@ -15,15 +15,16 @@
     width: 100%;
     padding: 20px 30px;
     grid-column: 1;
-    grid-gap: 20px;
+    grid-gap: 50px;
 }
 
 .board__content__column {
-    width: 280px;
+    width: 284px;
     border-radius: 10px;
     background-color: #f1f2f4;
     overflow-y: auto;
     padding-bottom: 15px;
+    align-self: start;
 }
 
 .column__header {
