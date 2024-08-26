@@ -45,10 +45,16 @@
 
 .column__add {
     display: flex;
-    padding: 0 15px;
+    margin: 0 15px;
     align-items: center;
     cursor: pointer;
-    width: fit-content;
+    width: calc(100% - 30px);
+    border-radius: 10px;
+    padding: 5px 5px;
+}
+
+.column__add:hover {
+    background-color: #e8e8e8;
 }
 
 .column__add svg {
