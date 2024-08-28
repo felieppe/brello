@@ -1,8 +1,10 @@
 import styles from '../styles/Home.module.css'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../components/header";
+import NewTask from "../modals/newTask";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,8 +32,27 @@ function Home() {
     const [columns, setColumns] = useState([{id: 1, name: "Backlog"}, {id: 2, name: "To Do"}, {id: 3, name: "In Progress"}, {id: 4, name: "Blocked"}, {id: 5, name: "Done"}]); 
     const [tasks, setTasks] = useState([]);
 
+    const [showNewTaskModal, setShowNewTaskModal] = useState(false);
+    const [newTaskModalData, setNewTaskModalData] = useState({});
+
+    const handleAddClick = (event) => {
+        let column_id = event.target.closest('div').getAttribute('column_id');
+        
+        setNewTaskModalData({id: column_id});
+        setShowNewTaskModal(true);
+    }
+
+    const handleSaveTask = (task) => {
+        task.id = tasks.length + 1;
+
+        setTasks([...tasks, task]);
+        setShowNewTaskModal(false);
+    }
+
     return (
         <main>
+            {showNewTaskModal && <NewTask column={newTaskModalData} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
+
             <Header />
 
             <div className={styles.board}>
@@ -56,7 +77,7 @@ function Home() {
                                     );
                                 })}
 
-                                <div className={styles.column__add}>
+                                <div className={styles.column__add} key={column.id} column_id={column.id} onClick={handleAddClick}>
                                     <FontAwesomeIcon icon={faPlus} />
                                     <p>Add a task</p>
                                 </div>       
