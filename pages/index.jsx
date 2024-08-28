@@ -49,6 +49,25 @@ function Home() {
         setShowNewTaskModal(false);
     }
 
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    }
+
+    const handleDrop = (event) => {
+        event.preventDefault();
+
+        let taskId = event.dataTransfer.getData("text/plain");
+        let task = tasks.find((t) => t.id == taskId);
+
+        task.state = event.target.closest('div').getAttribute('column_id');
+
+        setTasks([...tasks]);
+    }
+
+    const handleDragStart = (event) => {
+        event.dataTransfer.setData("text/plain", event.target.id);
+    }
+
     return (
         <main>
             {showNewTaskModal && <NewTask column={newTaskModalData} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
@@ -64,14 +83,14 @@ function Home() {
 
                     {columns.map((column) => {
                         return (
-                            <div className={styles.board__content__column} key={column.id}>
+                            <div className={styles.board__content__column} key={column.id} onDragOver={handleDragOver} onDrop={handleDrop}>
                                 <div className={styles.column__header}>
                                     {column.name}
                                 </div>
 
                                 {tasks.filter((t) => t.state == column.id).map((task) => {
                                     return (
-                                        <div className={styles.task} key={task.id}>
+                                        <div className={styles.task} key={task.id} id={task.id} draggable={true} onDragStart={handleDragStart}>
                                             <p>{task.title}</p>
                                         </div>
                                     );
