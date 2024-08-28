@@ -11,7 +11,7 @@ function Header() {
             <div className={styles.header}>
                 <div className={styles.header__logo}>
                     <Link href="/">
-                        <Image src={Logo.src} alt="Logo of Brello" width="120" height="1"/>
+                        <Image src={Logo.src} alt="Logo of Brello" width="80" height="1"/>
                     </Link>
                 </div>
             </div>
