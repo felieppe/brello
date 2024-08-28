@@ -10,7 +10,7 @@
 }
 
 .modal { 
-    background-color: #003830;
+    background-color: #f1f2f4;
     width: fit-content;
     height: fit-content;
     padding: 10px 20px;
@@ -67,6 +67,10 @@
 
 .description__box textarea {
     width: 400px;
+    background-color: #091E420F;
+    border: none;
+    color: #172B4D;
+    font-weight: 500;
 }
 
 .endtime__box input {
@@ -92,6 +96,8 @@
 
 .modal__content__right ul li a {
     width: 100%;
+    background-color: #091E420F !important;
+    color: #172B4D;
 }
 
 .modal__content__right ul li a svg {
@@ -100,4 +106,16 @@
 
 .modal__buttons button:first-child {
     margin-right: 20px;
+    width: 100px;
+}
+
+.modal__header__left svg,
+.modal__header__left input,
+.modal__header__left input::placeholder,
+.modal__header__right svg,
+.description__icon,
+.endtime,
+.endtime__box input,
+.modal__content__right {
+    color: #172B4D;
 }

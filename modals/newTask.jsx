@@ -76,8 +76,8 @@ function NewTask({ column, onCancel, onSave }) {
                         <div className={styles.modal__content__right}>
                             <p>Options</p>
                             <ul>
-                                <li><a className='button is-small'><FontAwesomeIcon icon={faUser} /> Members</a></li>
-                                <li><a className='button is-small'> <FontAwesomeIcon icon={faGauge} /> Priority</a></li>
+                                <li><a className='button is-small is-dark'><FontAwesomeIcon icon={faUser} /> Members</a></li>
+                                <li><a className='button is-small is-dark'> <FontAwesomeIcon icon={faGauge} /> Priority</a></li>
                             </ul>
                         </div>
                     </div>

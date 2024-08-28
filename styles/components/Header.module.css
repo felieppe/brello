@@ -5,6 +5,6 @@
     position: sticky;
     top: 0;
     z-index: 99;
-    background-color: #00d1b2;
-    border-bottom: 1px solid #02ffd9;
+    background-color: hsl(218,20.4%,34.4%);
+    border-bottom: 1px solid hsla(0,0%,100%,0.16);
 }
