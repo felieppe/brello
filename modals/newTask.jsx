@@ -16,13 +16,15 @@ function NewTask({ column, onCancel, onSave }) {
         let task_name = document.getElementById('task_name').value;
         let task_description = document.getElementById('task_description').value;
         let task_endtime = document.getElementById('task_endtime').value;
+    
+        if (task_name === '') { alert('Task name is required'); return; }
 
         let task = {
-            id: null,
+            id: undefined,
             title: task_name,
             description: task_description,
-            asigned: null,
-            priority: null,
+            asigned: undefined,
+            priority: undefined,
             state: parseInt(column.id),
             limit: task_endtime
         }
