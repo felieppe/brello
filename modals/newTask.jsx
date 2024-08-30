@@ -15,7 +15,7 @@ function NewTask({ column, onCancel, onSave }) {
 
         let task_name = document.getElementById('task_name').value;
         let task_description = document.getElementById('task_description').value;
-        let task_endtime = document.getElementById('task_endtime').value;
+        let task_endtime = document.getElementById('task_endtime').valueAsDate;
     
         if (task_name === '') { alert('Task name is required'); return; }
 
@@ -28,6 +28,8 @@ function NewTask({ column, onCancel, onSave }) {
             state: parseInt(column.id),
             limit: task_endtime
         }
+
+        console.log(task)
 
         clearInputs();
         onSave(task);
