@@ -29,8 +29,6 @@ function NewTask({ column, onCancel, onSave }) {
             limit: task_endtime
         }
 
-        console.log(task)
-
         clearInputs();
         onSave(task);
     }
