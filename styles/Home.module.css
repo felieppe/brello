@@ -64,6 +64,7 @@
 .board__content__add__form svg {
     margin-left: 15px;
     color: black;
+    cursor: pointer;
 }
 
 .board__content__add__form button {
@@ -72,6 +73,7 @@
     color: white;
     font-weight: 500;
     border-radius: 3px;
+    font-size: 12pt;
 }
 
 .board__content__column {
