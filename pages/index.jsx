@@ -6,7 +6,7 @@ import Header from "../components/header";
 import NewTask from "../modals/newTask";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
     /*
@@ -35,6 +35,7 @@ function Home() {
 
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [newTaskModalData, setNewTaskModalData] = useState({});
+    const [isAddingColumn, setIsAddingColumn] = useState(false);
 
     const handleAddClick = (event) => {
         let column_id = event.target.closest('div').getAttribute('column_id');
@@ -67,6 +68,19 @@ function Home() {
 
     const handleDragStart = (event) => {
         event.dataTransfer.setData("text/plain", event.target.id);
+    }
+
+    const handleAddColumn = (event) => {
+        event.preventDefault();
+
+        let name = event.target.querySelector('input').value;
+
+        if(name.length > 0) {
+            let id = columns.length + 1;
+
+            setColumns([...columns, {id: id, name: name}]);
+            setIsAddingColumn(false);
+        }
     }
 
     return (
@@ -104,6 +118,19 @@ function Home() {
                             </div>
                         );
                     })}
+
+                    { !isAddingColumn && <div className={styles.board__content__add} onClick={ () => { setIsAddingColumn(true) } }>
+                        <FontAwesomeIcon icon={faPlus} />
+                        <p>Add another list</p>
+                    </div> }
+
+                    { isAddingColumn && <div className={styles.board__content__add__form}>
+                        <form onSubmit={handleAddColumn}>
+                            <input className="input is-small" type="text" placeholder='Enter list name...'/> <br />
+                            <button>Add list</button>
+                            <FontAwesomeIcon icon={faXmark} />
+                        </form>
+                    </div>}
                 </div>
             </div>
         </main>

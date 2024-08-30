@@ -25,6 +25,55 @@
     grid-gap: 50px;
 }
 
+.board__content__add {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    width: 284px;
+    background-color: #ffffff3d;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.board__content__add svg {
+    margin-right: 10px;
+}
+
+.board__content__add p {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.board__content__add__form {
+    width: 284px;
+    height: 103px;
+    background-color: #f1f2f4;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.board__content__add__form input {
+    margin-bottom: 10px;
+    background-color: transparent !important;
+    color: black !important;
+    font-size: 10pt !important;
+}
+
+.board__content__add__form svg {
+    margin-left: 15px;
+    color: black;
+}
+
+.board__content__add__form button {
+    background-color: #0C66E4;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
 .board__content__column {
     width: 284px;
     border-radius: 10px;
