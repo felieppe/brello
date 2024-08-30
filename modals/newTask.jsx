@@ -25,8 +25,10 @@ function NewTask({ column, members, onCancel, onSave }) {
         let task_name = document.getElementById('task_name').value;
         let task_description = document.getElementById('task_description').value;
         let task_endtime = document.getElementById('task_endtime').valueAsDate;
-    
+
         if (task_name === '') { alert('Task name is required'); return; }
+        if (task_description === '') { alert('Task description is required'); return; }
+        if (task_endtime === null) { alert('Task end time is required'); return; }
 
         let task = {
             id: undefined,
