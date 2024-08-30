@@ -128,7 +128,7 @@ function Home() {
                         <form onSubmit={handleAddColumn}>
                             <input className="input is-small" type="text" placeholder='Enter list name...'/> <br />
                             <button>Add list</button>
-                            <FontAwesomeIcon icon={faXmark} />
+                            <FontAwesomeIcon icon={faXmark} onClick={() => { setIsAddingColumn(false) }}/>
                         </form>
                     </div>}
                 </div>
