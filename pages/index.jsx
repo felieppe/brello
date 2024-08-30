@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Header from "../components/header";
 import NewTask from "../modals/newTask";
@@ -31,6 +31,7 @@ function Home() {
     */
     const [columns, setColumns] = useState([{id: 1, name: "Backlog"}, {id: 2, name: "To Do"}, {id: 3, name: "In Progress"}, {id: 4, name: "Blocked"}, {id: 5, name: "Done"}]); 
     const [tasks, setTasks] = useState([]);
+    const [members, setMembers] = useState([{id: 1, name: "Felipe Cabrera", pfp: "https://lumiere-a.akamaihd.net/v1/images/a_avatarpandorapedia_jakesully_16x9_1098_02_b13c4171.jpeg"}]);
 
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [newTaskModalData, setNewTaskModalData] = useState({});
@@ -70,7 +71,7 @@ function Home() {
 
     return (
         <main>
-            {showNewTaskModal && <NewTask column={newTaskModalData} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
+            {showNewTaskModal && <NewTask column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
 
             <Header />
 

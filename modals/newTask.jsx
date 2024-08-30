@@ -1,14 +1,23 @@
-import { faCalendarDay, faCross, faGauge, faHeading, faParagraph, faPerson, faPersonRays, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faGauge, faHeading, faParagraph, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/modals/newTask.module.css';
+
+import { useState } from 'react';
+import MembersSelector from '../components/membersSelector';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function NewTask({ column, onCancel, onSave }) {
+function NewTask({ column, members, onCancel, onSave }) {
+    const [showMembersSelector, setShowMembersSelector] = useState(false);
+    const [newMembers, setNewMembers] = useState([]);
+
     const clearInputs = () => {
         document.getElementById('task_name').value = '';
         document.getElementById('task_description').value = '';
         document.getElementById('task_endtime').value = '';
     }
+
+    const handleMemberAdd = (id) => { setNewMembers([...newMembers, id]); }
+    const handleMemberRemove = (id) => { setNewMembers(newMembers.filter((member) => member !== id)); }
 
     const handleSave = (event) => {
         event.preventDefault();
@@ -23,7 +32,7 @@ function NewTask({ column, onCancel, onSave }) {
             id: undefined,
             title: task_name,
             description: task_description,
-            asigned: undefined,
+            asigned: [...newMembers],
             priority: undefined,
             state: parseInt(column.id),
             limit: task_endtime
@@ -78,7 +87,10 @@ function NewTask({ column, onCancel, onSave }) {
                         <div className={styles.modal__content__right}>
                             <p>Options</p>
                             <ul>
-                                <li><a className='button is-small is-dark'><FontAwesomeIcon icon={faUser} /> Members</a></li>
+                                <li>
+                                    <div onClick={() => { setShowMembersSelector(!showMembersSelector) }}><a className='button is-small is-dark'><FontAwesomeIcon icon={faUser}/> Members</a></div>
+                                    {showMembersSelector && <MembersSelector members={members} onAddMember={ handleMemberAdd } onRemoveMember={ handleMemberRemove } onCancel={() => { setShowMembersSelector(false); }} /> }
+                                </li>
                                 <li><a className='button is-small is-dark'> <FontAwesomeIcon icon={faGauge} /> Priority</a></li>
                             </ul>
                         </div>
