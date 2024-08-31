@@ -1,0 +1,33 @@
+.priority__selector__list {
+    margin-top: 5px;
+}
+
+.priority__selector__list > li {
+  background-color: #091E420F;
+  font-size: 0.7rem;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+}
+
+.priority__selector__list > li:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.priority__selector__list > li:hover {
+  background-color: #091E42;
+  color: white;
+  cursor: pointer;
+}
+
+.priority__selector__list > li.active {
+  background-color: #091E42;
+  color: white;
+  cursor: auto;
+}
+
+.priority__selector__list li svg {
+    margin-right: 10px;
+    font-size: 11px;
+}

@@ -3,12 +3,15 @@ import styles from '../styles/modals/newTask.module.css';
 
 import { useState } from 'react';
 import MembersSelector from '../components/membersSelector';
+import PrioritySelector from '../components/prioritySelector';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function NewTask({ column, members, onCancel, onSave }) {
     const [showMembersSelector, setShowMembersSelector] = useState(false);
+    const [showPrioritySelector, setShowPrioritySelector] = useState(false);
     const [newMembers, setNewMembers] = useState([]);
+    const [newPriority, setNewPriority] = useState(null);
 
     const clearInputs = () => {
         document.getElementById('task_name').value = '';
@@ -18,6 +21,8 @@ function NewTask({ column, members, onCancel, onSave }) {
 
     const handleMemberAdd = (id) => { setNewMembers([...newMembers, id]); }
     const handleMemberRemove = (id) => { setNewMembers(newMembers.filter((member) => member !== id)); }
+
+    const handlePriorityChange = (priority) => { setNewPriority(priority); setShowPrioritySelector(false); }
 
     const handleSave = (event) => {
         event.preventDefault();
@@ -35,11 +40,11 @@ function NewTask({ column, members, onCancel, onSave }) {
             title: task_name,
             description: task_description,
             asigned: [...newMembers],
-            priority: undefined,
+            priority: parseInt(newPriority),
             state: parseInt(column.id),
             limit: task_endtime
         }
-
+        
         clearInputs();
         onSave(task);
     }
@@ -93,7 +98,10 @@ function NewTask({ column, members, onCancel, onSave }) {
                                     <div onClick={() => { setShowMembersSelector(!showMembersSelector) }}><a className='button is-small is-dark'><FontAwesomeIcon icon={faUser}/> Members</a></div>
                                     {showMembersSelector && <MembersSelector members={members} onAddMember={ handleMemberAdd } onRemoveMember={ handleMemberRemove } onCancel={() => { setShowMembersSelector(false); }} /> }
                                 </li>
-                                <li><a className='button is-small is-dark'> <FontAwesomeIcon icon={faGauge} /> Priority</a></li>
+                                <li>
+                                    <div onClick={() => { setShowPrioritySelector(!showPrioritySelector) }}><a className='button is-small is-dark'> <FontAwesomeIcon icon={faGauge} /> Priority</a></div>
+                                    {showPrioritySelector && <PrioritySelector priority={newPriority} onPriorityChange={ handlePriorityChange }/> }
+                                </li>
                             </ul>
                         </div>
                     </div>
