@@ -4,10 +4,12 @@ import styles from '../styles/components/PrioritySelector.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
-function Selector({ priority = null, onPriorityChange }) {
+function Selector({ priority = null, onPriorityChange, readOnly = false }) {
     const [currentlySelected, setCurrentlySelected] = useState(priority);
 
     const handleOptionClick = (event) => {
+        if(readOnly) return;
+
         setCurrentlySelected(parseInt(event.target.getAttribute('value')));
         return onPriorityChange(parseInt(event.target.getAttribute('value')));
     }
