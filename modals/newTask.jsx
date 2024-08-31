@@ -11,7 +11,7 @@ function NewTask({ column, members, onCancel, onSave }) {
     const [showMembersSelector, setShowMembersSelector] = useState(false);
     const [showPrioritySelector, setShowPrioritySelector] = useState(false);
     const [newMembers, setNewMembers] = useState([]);
-    const [newPriority, setNewPriority] = useState(null);
+    const [newPriority, setNewPriority] = useState(0);
 
     const clearInputs = () => {
         document.getElementById('task_name').value = '';

@@ -6,7 +6,7 @@ import Header from "../components/header";
 import NewTask from "../modals/newTask";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
     /*
@@ -37,6 +37,8 @@ function Home() {
     const [newTaskModalData, setNewTaskModalData] = useState({});
     const [isAddingColumn, setIsAddingColumn] = useState(false);
 
+    const priorityColors = ["transparent", "#37ab2c", "#c9b51b", "#ab2c2c"]     //  0: No Priority, 1: Low, 2: Medium, 3: High
+
     const handleAddClick = (event) => {
         let column_id = event.target.closest('div').getAttribute('column_id');
         
@@ -46,6 +48,8 @@ function Home() {
 
     const handleSaveTask = (task) => {
         task.id = tasks.length + 1;
+
+        console.log(task)
 
         setTasks([...tasks, task]);
         setShowNewTaskModal(false);
@@ -106,7 +110,16 @@ function Home() {
                                 {tasks.filter((t) => t.state == column.id).map((task) => {
                                     return (
                                         <div className={styles.task} key={task.id} id={task.id} draggable={true} onDragStart={handleDragStart}>
-                                            <p>{task.title}</p>
+                                            <div className={styles.task__title}>
+                                                <p>{task.title}</p>
+                                                
+                                                { task.priority > 0 ? <div className={styles.task__title__priority} style={{"backgroundColor": priorityColors[task.priority]}}/> : null}
+                                            </div>
+
+                                            <ul className={styles.task__features}>
+                                                {task.description !== undefined && task.description.length !== 0 ? <li><FontAwesomeIcon icon={faAlignLeft} /></li> : null}
+                                                {task.asigned.length !== 0 ? <li><FontAwesomeIcon icon={faUser} /></li> : null}
+                                            </ul>
                                         </div>
                                     );
                                 })}
