@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Selector({ members = {}, onCancel, onAddMember, onRemoveMember }) {
+function Selector({ members = {}, onCancel, onAddMember, onRemoveMember, readOnly = false }) {
     const [isRemoveVisible, setIsRemoveVisible] = useState([]);
 
     const handleMemberClick = (event) => {
+        if (readOnly) return;
+
         event.preventDefault()
         let id = parseInt(event.currentTarget.id);
 
