@@ -47,10 +47,6 @@ function Home() {
     }
 
     const handleSaveTask = (task) => {
-        task.id = tasks.length + 1;
-
-        console.log(task)
-
         setTasks([...tasks, task]);
         setShowNewTaskModal(false);
     }
