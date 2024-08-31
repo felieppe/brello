@@ -1,0 +1,121 @@
+.modal__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    position: absolute;
+    align-items: center;
+    background-color: #000000b6;
+}
+
+.modal { 
+    background-color: #f1f2f4;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal__header__left {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 50px);
+}
+
+.modal__header__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50px;
+}
+
+.modal__content {
+    display: flex;
+}
+
+.modal__content__left > * {
+    margin-bottom: 20px;
+}
+
+.modal__header__left svg {
+    margin-right: 15px;
+}
+
+.modal__header__left input {
+    background: none;
+    border: none;
+}
+
+.description__icon,
+.endtime__icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.description__icon svg,
+.endtime__icon svg {
+    margin-right: 15px;
+}
+
+.description__box textarea {
+    width: 400px;
+    background-color: #091E420F;
+    border: none;
+    color: #172B4D;
+    font-weight: 500;
+}
+
+.endtime__box input {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.027);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.modal__content__right {
+    padding-left: 50px;
+}
+
+.modal__content__right p {
+    margin-bottom: 5px;
+}
+
+.modal__content__right ul li {
+    margin-bottom: 5px;
+}
+
+.modal__content__right ul li a {
+    width: 100%;
+    background-color: #091E420F !important;
+    color: #172B4D;
+}
+
+.modal__content__right ul li a svg {
+    margin-right: 10px;
+}
+
+.modal__buttons button:first-child {
+    margin-right: 20px;
+    width: 100px;
+}
+
+.modal__header__left svg,
+.modal__header__left input,
+.modal__header__left input::placeholder,
+.modal__header__right svg,
+.description__icon,
+.endtime,
+.endtime__box input,
+.modal__content__right {
+    color: #172B4D;
+}

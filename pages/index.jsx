@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Header from "../components/header";
 import NewTask from "../modals/newTask";
+import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -34,10 +35,20 @@ function Home() {
     const [members, setMembers] = useState([{id: 1, name: "Felipe Cabrera", pfp: "https://lumiere-a.akamaihd.net/v1/images/a_avatarpandorapedia_jakesully_16x9_1098_02_b13c4171.jpeg"}]);
 
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
+    const [showTaskModal, setShowTaskModal] = useState(false);
+    const [showingTask, setShowingTask] = useState({});
     const [newTaskModalData, setNewTaskModalData] = useState({});
     const [isAddingColumn, setIsAddingColumn] = useState(false);
 
     const priorityColors = ["transparent", "#37ab2c", "#c9b51b", "#ab2c2c"]     //  0: No Priority, 1: Low, 2: Medium, 3: High
+
+    const handleTaskClick = (event) => {
+        let taskId = event.target.closest('div.'+styles.task).getAttribute('id');
+        let task = tasks.find((t) => t.id === taskId);
+        
+        setShowingTask(task);
+        setShowTaskModal(true);
+    }
 
     const handleAddClick = (event) => {
         let column_id = event.target.closest('div').getAttribute('column_id');
@@ -85,7 +96,8 @@ function Home() {
 
     return (
         <main>
-            {showNewTaskModal && <NewTask column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
+            { (showNewTaskModal && showTaskModal == false) && <NewTask column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
+            { (showTaskModal && showNewTaskModal == false) && <Task task={showingTask} members={members} onCancel={() => { setShowTaskModal(false) }}/> }
 
             <Header />
 
@@ -105,7 +117,7 @@ function Home() {
 
                                 {tasks.filter((t) => t.state == column.id).map((task) => {
                                     return (
-                                        <div className={styles.task} key={task.id} id={task.id} draggable={true} onDragStart={handleDragStart}>
+                                        <div className={styles.task} key={task.id} id={task.id} draggable={true} onDragStart={handleDragStart} onClick={handleTaskClick}>
                                             <div className={styles.task__title}>
                                                 <p>{task.title}</p>
                                                 
