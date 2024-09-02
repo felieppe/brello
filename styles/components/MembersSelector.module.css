@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+.members__selector__list p {
+    margin: 0;
+}
+
 .members__selector__search {
     margin-bottom: 10px;
 }
