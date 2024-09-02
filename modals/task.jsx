@@ -63,7 +63,7 @@ function Task({ theme = 'light', task = {}, members = {}, onCancel = {} }) {
                             <ul>
                                 <li>
                                     <div onClick={() => { setShowMembersSelector(!showMembersSelector) }} style={{"backgroundColor": actualTheme === "dark" ? "#ffffff0f" : "", "borderRadius": actualTheme === "dark" ? "0.5rem" : ""}}><a className='button is-small is-dark' style={{"color": actualTheme === "dark" ? "#b6c2cf" : ""}}><FontAwesomeIcon icon={faUser} style={{"color": actualTheme === "dark" ? "#b6c2cf" : ""}}/> Members</a></div>
-                                    {showMembersSelector && <MembersSelector theme={actualTheme} members={members.filter((m) => task.asigned.includes(m.id))} onCancel={() => { setShowMembersSelector(false); }} readOnly/> }
+                                    {showMembersSelector && <MembersSelector theme={actualTheme} members={members.filter((m) => task.assigned.includes(m.id))} onCancel={() => { setShowMembersSelector(false); }} readOnly/> }
                                 </li>
                                 <li>
                                     <div onClick={() => { setShowPrioritySelector(!showPrioritySelector) }} style={{"backgroundColor": actualTheme === "dark" ? "#ffffff0f" : "", "borderRadius": actualTheme === "dark" ? "0.5rem" : ""}}><a className='button is-small is-dark' style={{"color": actualTheme === "dark" ? "#b6c2cf" : ""}}> <FontAwesomeIcon icon={faGauge} style={{"color": actualTheme === "dark" ? "#b6c2cf" : ""}}/> Priority</a></div>

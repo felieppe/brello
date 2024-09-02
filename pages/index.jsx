@@ -24,7 +24,7 @@ function Home({ endpointTasks = {} }) {
             id: 1,
             title: "Task 1",
             description: "",
-            asigned: "",
+            assigned: "",
             priority: 0,
             state: "",
             limit: ""
@@ -132,7 +132,7 @@ function Home({ endpointTasks = {} }) {
 
                                             <ul className={styles.task__features}>
                                                 {task.description !== undefined && task.description.length !== 0 ? <li><FontAwesomeIcon icon={faAlignLeft} style={{color: actualTheme === 'dark' ? "#B6C2CF" : ""}} /></li> : null}
-                                                {task.asigned.length !== 0 ? <li><FontAwesomeIcon icon={faUser} style={{color: actualTheme === 'dark' ? "#B6C2CF" : ""}} /></li> : null}
+                                                {task.assigned.length !== 0 ? <li><FontAwesomeIcon icon={faUser} style={{color: actualTheme === 'dark' ? "#B6C2CF" : ""}} /></li> : null}
                                             </ul>
                                         </div>
                                     );
