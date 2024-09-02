@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../components/header";
 import NewTask from "../modals/newTask";
@@ -8,8 +8,9 @@ import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { fetchTasks } from '../utils/api';
 
-function Home() {
+function Home({ endpointTasks = {} }) {
     /*
     
         Column Example: 
@@ -95,6 +96,10 @@ function Home() {
         }
     }
 
+    useEffect(() => {
+        setTasks(endpointTasks);
+    }, [tasks]);
+
     return (
         <main>
             { (showNewTaskModal && showTaskModal == false) && <NewTask theme={actualTheme} column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
@@ -160,3 +165,8 @@ function Home() {
 }
 
 export default Home;
+
+export async function getServerSideProps() {
+    const response = await fetchTasks({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
+    return { props: { endpointTasks: (response != undefined ? response : [{}]) } }
+}
