@@ -20,4 +20,22 @@ async function fetchTaskById(id) {
     } catch(err) { throw err.response.data["error"] }
 }
 
-export { fetchTasks, fetchTaskById }
+async function fetchMembers(filters) {
+    const endpoint = `${BASE_URL}/members`
+
+    try {
+        const response = await axios.get(endpoint, { params: filters })
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
+async function fetchMemberById(id) {
+    const endpoint = `${BASE_URL}/members/${id}`
+
+    try {
+        const response = await axios.get(endpoint)
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
+export { fetchTasks, fetchTaskById, fetchMembers, fetchMemberById };

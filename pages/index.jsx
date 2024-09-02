@@ -8,9 +8,9 @@ import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { fetchTasks } from '../utils/api';
+import { fetchTasks, fetchMembers } from '../utils/api';
 
-function Home({ endpointTasks = {} }) {
+function Home({ endpointTasks = {}, endpointMembers = {} }) {
     /*
     
         Column Example: 
@@ -33,7 +33,7 @@ function Home({ endpointTasks = {} }) {
     */
     const [columns, setColumns] = useState([{id: 1, name: "Backlog"}, {id: 2, name: "To Do"}, {id: 3, name: "In Progress"}, {id: 4, name: "Blocked"}, {id: 5, name: "Done"}]); 
     const [tasks, setTasks] = useState([]);
-    const [members, setMembers] = useState([{id: 1, name: "Felipe Cabrera", pfp: "https://lumiere-a.akamaihd.net/v1/images/a_avatarpandorapedia_jakesully_16x9_1098_02_b13c4171.jpeg"}]);
+    const [members, setMembers] = useState([]);
     const [actualTheme, setActualTheme] = useState('light');
 
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
@@ -98,7 +98,9 @@ function Home({ endpointTasks = {} }) {
 
     useEffect(() => {
         setTasks(endpointTasks);
-    }, [tasks]);
+        setMembers(endpointMembers);
+
+    }, [endpointTasks, endpointMembers]);
 
     return (
         <main>
@@ -167,6 +169,8 @@ function Home({ endpointTasks = {} }) {
 export default Home;
 
 export async function getServerSideProps() {
-    const response = await fetchTasks({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
-    return { props: { endpointTasks: (response != undefined ? response : [{}]) } }
+    const tasks = await fetchTasks({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
+    const members = await fetchMembers({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
+
+    return { props: { endpointTasks: (tasks != undefined ? tasks : [{}]), endpointMembers: (members != undefined ? members : [{}]) } }
 }
