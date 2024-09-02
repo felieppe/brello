@@ -53,7 +53,7 @@ function Task({ theme = 'light', task = {}, members = {}, onCancel = {} }) {
                                 </div>
 
                                 <div className={styles.endtime__box}>
-                                    <input className="input is-small" type="date" name="task_endtime" id="task_endtime" value={new Date(task.limit).toISOString().slice(0, 10)} style={{"color": actualTheme === "dark" ? "#b6c2cf" : "", "backgroundColor": actualTheme === "dark" ? "#272c31" : ""}} readOnly/>
+                                    <input className="input is-small" type="date" name="task_endtime" id="task_endtime" value={task.limit != undefined ? new Date(task.limit).toISOString().slice(0, 10) : "" } style={{"color": actualTheme === "dark" ? "#b6c2cf" : "", "backgroundColor": actualTheme === "dark" ? "#272c31" : ""}} readOnly/>
                                 </div>
                             </div>
                         </div>
