@@ -6,8 +6,13 @@ import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Selector({ members = {}, onCancel, onAddMember, onRemoveMember, readOnly = false }) {
+function Selector({ theme = "light", members = {}, onCancel, onAddMember, onRemoveMember, readOnly = false }) {
     const [isRemoveVisible, setIsRemoveVisible] = useState([]);
+    const [actualTheme, setActualTheme] = useState(theme);
+
+    useEffect(() => {
+        setActualTheme(theme);
+    }, [theme])
 
     const handleMemberClick = (event) => {
         if (readOnly) return;
@@ -22,7 +27,7 @@ function Selector({ members = {}, onCancel, onAddMember, onRemoveMember, readOnl
     }
 
     return (
-        <div className={styles.members__selector}>
+        <div className={styles.members__selector} style={{"backgroundColor": actualTheme === "dark" ? "#272c31" : "", "color": actualTheme === "dark" ? "#b6c2cf" : ""}}>
             <div className={styles.members__selector__header}>
                 <p>Members</p>
                 <div className={styles.selector__header__exit} onClick={() => { onCancel(); }}>
@@ -31,7 +36,7 @@ function Selector({ members = {}, onCancel, onAddMember, onRemoveMember, readOnl
             </div>
 
             <div className={styles.members__selector__search}>
-                <input type="text" name="selectorSearch" id="selectorSearch" placeholder='John Doe'/>
+                <input type="text" name="selectorSearch" id="selectorSearch" placeholder='John Doe' style={{"backgroundColor": actualTheme === "dark" ? "#1c2024" : "", "border": "none", "color": actualTheme === "dark" ? "#b6c2cf" : ""}}/>
             </div>
 
             <div className={styles.members__selector__list}>
