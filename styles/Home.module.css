@@ -16,15 +16,23 @@
     font-weight: bold;
 }
 
-.board__header__add {
+.board__header__options {
     display: flex;
     align-items: center;
 }
 
-.board__header__add svg {
+.board__header__options > *:not(:last-child) {
+    margin-right: 20px;
+}
+
+.board__header__options svg {
     margin-right: 10px;
     color: white;
     cursor: pointer;
+}
+
+.board__header__options button {
+    color: white;
 }
 
 .board__content {

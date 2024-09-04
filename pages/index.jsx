@@ -7,7 +7,7 @@ import NewTask from "../modals/newTask";
 import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft, faPlus, faTrash, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { fetchTasks, fetchMembers, fetchColumns, createTask, createColumn } from '../utils/api';
 
 function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }) {
@@ -107,6 +107,10 @@ function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }
         alert('Add Member');
     }
 
+    const handleRemoveBoard = (event) => {
+        alert('Remove Board');
+    }
+
     useEffect(() => {
         if (typeof window !== undefined) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { setActualTheme('dark'); }
@@ -132,8 +136,9 @@ function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }
                 <div className={styles.board__header} style={{"backgroundColor": actualTheme === 'dark' ? "#15181ee6" : ""}}>
                     <h1>Board Name</h1>
 
-                    <div className={styles.board__header__add}>
+                    <div className={styles.board__header__options}>
                         <button className='button is-small' onClick={handleAddMembers}><FontAwesomeIcon icon={faUser} /> Add Members</button>
+                        <button className='button is-small' onClick={handleRemoveBoard}> <FontAwesomeIcon icon={faTrash}/> Remove Board</button>
                     </div>
                 </div>
 
