@@ -16,6 +16,17 @@
     font-weight: bold;
 }
 
+.board__header__add {
+    display: flex;
+    align-items: center;
+}
+
+.board__header__add svg {
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+
 .board__content {
     display: flex;
     width: 100%;

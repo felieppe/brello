@@ -103,6 +103,10 @@ function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }
         }
     }
 
+    const handleAddMembers = (event) => {
+        alert('Add Member');
+    }
+
     useEffect(() => {
         if (typeof window !== undefined) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { setActualTheme('dark'); }
@@ -121,11 +125,16 @@ function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }
             { (showNewTaskModal && showTaskModal == false) && <NewTask theme={actualTheme} column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
             { (showTaskModal && showNewTaskModal == false) && <Task theme={actualTheme} task={showingTask} members={members} onCancel={() => { setShowTaskModal(false) }}/> }
 
+
             <Header theme={actualTheme} onThemeChange={(t) => { setActualTheme(t) }}/>
 
             <div className={styles.board} style={{"backgroundColor": actualTheme === 'dark' ? "#191f2a" : ""}}>
                 <div className={styles.board__header} style={{"backgroundColor": actualTheme === 'dark' ? "#15181ee6" : ""}}>
                     <h1>Board Name</h1>
+
+                    <div className={styles.board__header__add}>
+                        <button className='button is-small' onClick={handleAddMembers}><FontAwesomeIcon icon={faUser} /> Add Members</button>
+                    </div>
                 </div>
 
                 <div className={styles.board__content} style={{"backgroundColor": actualTheme === 'dark' ? "#191f2a" : "", "backgroundBlendMode": actualTheme === 'dark' ? "darken" : ""}}>
