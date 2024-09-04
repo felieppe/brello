@@ -97,6 +97,12 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
     }
 
     useEffect(() => {
+        if (typeof window !== undefined) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { setActualTheme('dark'); }
+        }
+    }, []);
+    
+    useEffect(() => {
         setTasks(endpointTasks);
         setMembers(endpointMembers);
 
@@ -107,7 +113,7 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
             { (showNewTaskModal && showTaskModal == false) && <NewTask theme={actualTheme} column={newTaskModalData} members={members} onSave={ handleSaveTask } onCancel={() => { setShowNewTaskModal(false) }}/>}
             { (showTaskModal && showNewTaskModal == false) && <Task theme={actualTheme} task={showingTask} members={members} onCancel={() => { setShowTaskModal(false) }}/> }
 
-            <Header onThemeChange={(t) => { setActualTheme(t) }}/>
+            <Header theme={actualTheme} onThemeChange={(t) => { setActualTheme(t) }}/>
 
             <div className={styles.board} style={{"backgroundColor": actualTheme === 'dark' ? "#191f2a" : ""}}>
                 <div className={styles.board__header} style={{"backgroundColor": actualTheme === 'dark' ? "#15181ee6" : ""}}>
