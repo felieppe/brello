@@ -109,7 +109,7 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
 
             <Header onThemeChange={(t) => { setActualTheme(t) }}/>
 
-            <div className={styles.board}>
+            <div className={styles.board} style={{"backgroundColor": actualTheme === 'dark' ? "#191f2a" : ""}}>
                 <div className={styles.board__header} style={{"backgroundColor": actualTheme === 'dark' ? "#15181ee6" : ""}}>
                     <h1>Board Name</h1>
                 </div>
