@@ -38,6 +38,24 @@ async function fetchMemberById(id) {
     } catch(err) { throw err.response.data["error"] }
 }
 
+async function fetchColumns(filters) {
+    const endpoint = `${BASE_URL}/columns`
+
+    try {
+        const response = await axios.get(endpoint, { params: filters })
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
+async function fetchColumnById(id) {
+    const endpoint = `${BASE_URL}/columns/${id}`
+
+    try {
+        const response = await axios.get(endpoint)
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
 async function createTask(task) {
     const endpoint = `${BASE_URL}/tasks`
 
@@ -47,4 +65,13 @@ async function createTask(task) {
     } catch(err) { throw err.response.data["error"] }
 }
 
-export { fetchTasks, fetchTaskById, fetchMembers, fetchMemberById, createTask };
+async function createColumn(column) {
+    const endpoint = `${BASE_URL}/columns`
+
+    try {
+        const response = await axios.post(endpoint, column)
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
+export { fetchTasks, fetchTaskById, fetchMembers, fetchMemberById, fetchColumns, fetchColumnById, createTask, createColumn };

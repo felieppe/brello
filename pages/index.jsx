@@ -8,9 +8,9 @@ import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { fetchTasks, fetchMembers, createTask } from '../utils/api';
+import { fetchTasks, fetchMembers, fetchColumns, createTask, createColumn } from '../utils/api';
 
-function Home({ endpointTasks = {}, endpointMembers = {} }) {
+function Home({ endpointTasks = {}, endpointMembers = {}, endpointColumns = {} }) {
     /*
     
         Column Example: 
@@ -31,7 +31,7 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
         }
 
     */
-    const [columns, setColumns] = useState([{id: 1, name: "Backlog"}, {id: 2, name: "To Do"}, {id: 3, name: "In Progress"}, {id: 4, name: "Blocked"}, {id: 5, name: "Done"}]); 
+    const [columns, setColumns] = useState([]); 
     const [tasks, setTasks] = useState([]);
     const [members, setMembers] = useState([]);
     const [actualTheme, setActualTheme] = useState('light');
@@ -93,9 +93,12 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
         let name = event.target.querySelector('input').value;
 
         if(name.length > 0) {
-            let id = columns.length + 1;
+            let task = {name: name};
+            createColumn(task).then((response) => {
+                task.id = response.id;
+                setColumns([...columns, task]);
+            }).catch((err) => { console.log(err) });
 
-            setColumns([...columns, {id: id, name: name}]);
             setIsAddingColumn(false);
         }
     }
@@ -109,8 +112,9 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
     useEffect(() => {
         setTasks(endpointTasks);
         setMembers(endpointMembers);
+        setColumns(endpointColumns);
 
-    }, [endpointTasks, endpointMembers]);
+    }, [endpointTasks, endpointMembers, endpointColumns]);
 
     return (
         <main>
@@ -179,8 +183,9 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
 export default Home;
 
 export async function getServerSideProps() {
-    const tasks = await fetchTasks({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
-    const members = await fetchMembers({}).catch((err) => { if (err["code"] === 404) { return [{}] } });
+    const tasks = await fetchTasks({}).catch((err) => { if (err["code"] === 404) { return [] } });
+    const members = await fetchMembers({}).catch((err) => { if (err["code"] === 404) { return [] } });
+    const columns = await fetchColumns({}).catch((err) => { if (err["code"] === 404) { return [] } });
 
-    return { props: { endpointTasks: (tasks != undefined ? tasks : [{}]), endpointMembers: (members != undefined ? members : [{}]) } }
+    return { props: { endpointTasks: (tasks != undefined ? tasks : []), endpointMembers: (members != undefined ? members : []), endpointColumns: (columns != undefined ? columns : []) } }
 }

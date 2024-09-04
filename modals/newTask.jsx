@@ -45,7 +45,7 @@ function NewTask({ theme = 'light', column, members, onCancel, onSave }) {
             description: task_description,
             assigned: [...newMembers],
             priority: parseInt(newPriority),
-            state: parseInt(column.id),
+            state: column.id,
             limit: task_endtime
         }
 
