@@ -38,4 +38,13 @@ async function fetchMemberById(id) {
     } catch(err) { throw err.response.data["error"] }
 }
 
-export { fetchTasks, fetchTaskById, fetchMembers, fetchMemberById };
+async function createTask(task) {
+    const endpoint = `${BASE_URL}/tasks`
+
+    try {
+        const response = await axios.post(endpoint, task)
+        return response.data["data"];
+    } catch(err) { throw err.response.data["error"] }
+}
+
+export { fetchTasks, fetchTaskById, fetchMembers, fetchMemberById, createTask };

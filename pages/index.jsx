@@ -8,7 +8,7 @@ import Task from "../modals/task";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignLeft, faPlus, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { fetchTasks, fetchMembers } from '../utils/api';
+import { fetchTasks, fetchMembers, createTask } from '../utils/api';
 
 function Home({ endpointTasks = {}, endpointMembers = {} }) {
     /*
@@ -60,7 +60,11 @@ function Home({ endpointTasks = {}, endpointMembers = {} }) {
     }
 
     const handleSaveTask = (task) => {
-        setTasks([...tasks, task]);
+        createTask(task).then((response) => {
+            task.id = response.id;
+            setTasks([...tasks, task]);
+        }).catch((err) => { console.log(err) });
+        
         setShowNewTaskModal(false);
     }
 

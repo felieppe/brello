@@ -7,8 +7,6 @@ import PrioritySelector from '../components/prioritySelector';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const { v4: uuidv4 } = require('uuid');
-
 function NewTask({ theme = 'light', column, members, onCancel, onSave }) {
     const [showMembersSelector, setShowMembersSelector] = useState(false);
     const [showPrioritySelector, setShowPrioritySelector] = useState(false);
@@ -43,7 +41,6 @@ function NewTask({ theme = 'light', column, members, onCancel, onSave }) {
         if (task_endtime === null) { alert('Task end time is required'); return; }
 
         let task = {
-            id: uuidv4(),
             title: task_name,
             description: task_description,
             assigned: [...newMembers],
